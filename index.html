@@ -169,7 +169,7 @@
                     // Reached right edge
                     goat.style.opacity = 0; // Hide
                     setTimeout(() => {
-                        goat.style.transform = 'scaleX(-1)'; // Flip direction
+                        goat.style.transform = 'scaleX(1)'; // Flip direction
                         goat.style.opacity = 1; // Show goat again
                     }, 300);
                     direction = -1; // Reverse direction
@@ -179,7 +179,7 @@
                     // Reached left edge
                     goat.style.opacity = 0; // Hide
                     setTimeout(() => {
-                        goat.style.transform = 'scaleX(1)'; // Flip direction back to original
+                        goat.style.transform = 'scaleX(-1)'; // Flip direction back to original
                         goat.style.opacity = 1; // Show goat again
                     }, 300);
                     direction = 1; // Reverse direction
