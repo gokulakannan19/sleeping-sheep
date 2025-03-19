@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Goat Animation</title>
+    <style>
+        /* Main screen (background) */
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            /* Stack elements vertically */
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+
+        /* Garden container styled like a video player */
+        .video-player {
+            width: 640px;
+            height: 360px;
+            background-image: url('garden.png');
+            /* Garden background image */
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            position: relative;
+            /* Allows positioning of elements inside */
+            overflow: hidden;
+            /* Prevent goat from going outside bounds */
+        }
+
+        /* Goat image for animation */
+        .goat-image {
+            position: absolute;
+            bottom: 10px;
+            /* Positioned slightly above the bottom of the container */
+            left: 0;
+            /* Start from the left */
+            width: 100px;
+            /* Adjust size as needed */
+            height: auto;
+            /* Maintain aspect ratio */
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            /* Smooth hiding and flipping effect */
+        }
+
+        /* Text container for the counter */
+        .text-container {
+            position: absolute;
+            top: 10px;
+            /* Center top */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            /* Set the size of the container */
+            height: 50px;
+            /* Adjust height to fit text */
+            background-color: #FFDD57;
+            /* A playful yellow color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 4px solid #FF5733;
+            /* Bright orange border */
+            border-radius: 15px;
+            /* Rounded corners for a cartoonish look */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            /* Add a shadow for emphasis */
+        }
+
+        /* Cartoonish text styling */
+        .text-count {
+            font-size: 24px;
+            /* Large text */
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            /* Cartoonish font style */
+            font-weight: bold;
+            color: #333;
+            /* Dark text color for contrast */
+        }
+
+        /* Button styling */
+        .button-container {
+            margin-top: 20px;
+            /* Add space between container and buttons */
+        }
+
+        .button {
+            font-size: 18px;
+            font-family: 'Comic Sans MS', 'Arial', 'sans-serif';
+            font-weight: bold;
+            background-color: #FF5733;
+            /* Bright orange color for buttons */
+            color: #fff;
+            /* White text */
+            border: none;
+            border-radius: 10px;
+            /* Rounded corners */
+            padding: 10px 20px;
+            /* Button size */
+            cursor: pointer;
+            /* Add a pointer cursor on hover */
+            margin: 0 10px;
+            /* Add space between buttons */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            /* Add shadow for depth */
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            /* Smooth hover animation */
+        }
+
+        /* Button hover effect */
+        .button:hover {
+            transform: translateY(-3px);
+            /* Lift button on hover */
+            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+            /* Enhance shadow */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="video-player">
+        <!-- Text Counter -->
+        <div class="text-container">
+            <div class="text-count" id="counter">Count: 0</div>
+        </div>
+
+        <!-- Goat Image -->
+        <img src="sheep.png" alt="Goat" class="goat-image" id="goat">
+    </div>
+
+    <!-- Buttons -->
+    <div class="button-container">
+        <button class="button" onclick="playAction()">Play</button>
+        <button class="button" onclick="stopAction()">Stop</button>
+        <button class="button" onclick="resetAction()">Reset</button>
+    </div>
+
+    <script>
+        // Variables
+        let count = 0; // Counter value
+        const goat = document.getElementById('goat');
+        const counter = document.getElementById('counter');
+        let animationRunning = false; // To prevent multiple animations at once
+        let interval = null; // Store the interval for pausing
+
+        // Play button action
+        function playAction() {
+            if (animationRunning) return; // Prevent multiple play actions
+            animationRunning = true; // Set flag to true
+
+            // Animate goat
+            let direction = 1; // 1 for right, -1 for left
+            let position = parseInt(goat.style.left) || 0; // Starting position (resume from where it stopped)
+            interval = setInterval(() => {
+                position += 10 * direction; // Move goat
+                goat.style.left = position + 'px'; // Update position
+
+                // Jumping effect by moving goat up and down
+                goat.style.bottom = (10 + Math.sin(position / 20) * 20) + 'px';
+
+                // Check boundaries for left-to-right or right-to-left increments
+                if (position >= 540 && direction === 1) {
+                    // Reached right edge
+                    goat.style.opacity = 0; // Hide
+                    setTimeout(() => {
+                        goat.style.transform = 'scaleX(-1)'; // Flip direction
+                        goat.style.opacity = 1; // Show goat again
+                    }, 300);
+                    direction = -1; // Reverse direction
+                    count++; // Increment count for left-to-right
+                    counter.innerText = `Count: ${count}`;
+                } else if (position <= 0 && direction === -1) {
+                    // Reached left edge
+                    goat.style.opacity = 0; // Hide
+                    setTimeout(() => {
+                        goat.style.transform = 'scaleX(1)'; // Flip direction back to original
+                        goat.style.opacity = 1; // Show goat again
+                    }, 300);
+                    direction = 1; // Reverse direction
+                    count++; // Increment count for right-to-left
+                    counter.innerText = `Count: ${count}`;
+                }
+            }, 30); // Adjust speed as needed
+        }
+
+        // Stop button action
+        function stopAction() {
+            clearInterval(interval); // Stop the goat's movement
+            animationRunning = false; // Allow re-starting with Play button
+        }
+
+        // Reset button action
+        function resetAction() {
+            clearInterval(interval); // Stop any ongoing animation
+            animationRunning = false; // Reset animation state
+            count = 0; // Reset counter
+            counter.innerText = 'Count: 0'; // Update counter display
+            goat.style.left = '0px'; // Reset goat position
+            goat.style.bottom = '10px'; // Reset goat height
+            goat.style.transform = 'scaleX(1)'; // Reset direction
+        }
+    </script>
+
+
+
+</body>
+
+</html>

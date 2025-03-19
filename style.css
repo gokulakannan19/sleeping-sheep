@@ -1,0 +1,94 @@
+/* General Body Styling */
+body {
+  margin: 0;
+  font-family: 'Luckiest Guy', cursive;
+  text-align: center;
+
+  /* Ensures the image stretches and stays fixed */
+}
+
+
+/* Title and Description */
+#title {
+  font-size: 3rem;
+  color: #ff6347;
+  text-shadow: 2px 2px #ffa07a;
+}
+
+#description {
+  font-size: 1.5rem;
+  color: #4caf50;
+  margin: 0.5rem 0 1rem;
+}
+
+/* Square Animation Container */
+#animation-container {
+  margin: 1rem auto;
+  width: 50%;
+  max-width: 600px;
+  height: 50%;
+  max-height: 600px;
+  background: url('garden.png') no-repeat center center;
+  background-size: cover;
+  /* Ensures the background stretches properly */
+  position: relative;
+  /* Maintains positioning for child elements */
+  overflow: hidden;
+  /* Prevents any content from spilling out */
+}
+
+
+
+/* Counter Box */
+#counter-box {
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 20px;
+  background: linear-gradient(to right, #32cd32, #7fff00);
+  border: 3px solid #228b22;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  font-size: 1.5rem;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+}
+
+/* Buttons */
+#controls {
+  margin-top: 1rem;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  background-color: #87ceeb;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #4682b4;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+#sheep {
+  position: absolute;
+  bottom: 10px;
+  /* Distance from the bottom of the animation container */
+  left: 0;
+  /* Starts at the left edge */
+  height: 70px;
+  /* Reduce the size of the sheep */
+  width: auto;
+  /* Maintain the aspect ratio */
+  z-index: 10;
+  /* Ensures the sheep is on top of the background */
+}
