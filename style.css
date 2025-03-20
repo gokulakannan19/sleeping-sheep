@@ -1,94 +1,114 @@
-/* General Body Styling */
+/* Main screen (background) */
 body {
   margin: 0;
-  font-family: 'Luckiest Guy', cursive;
-  text-align: center;
-
-  /* Ensures the image stretches and stays fixed */
+  display: flex;
+  flex-direction: column;
+  /* Stack elements vertically */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
 }
 
-
-/* Title and Description */
-#title {
-  font-size: 3rem;
-  color: #ff6347;
-  text-shadow: 2px 2px #ffa07a;
-}
-
-#description {
-  font-size: 1.5rem;
-  color: #4caf50;
-  margin: 0.5rem 0 1rem;
-}
-
-/* Square Animation Container */
-#animation-container {
-  margin: 1rem auto;
-  width: 50%;
-  max-width: 600px;
-  height: 50%;
-  max-height: 600px;
-  background: url('garden.png') no-repeat center center;
+/* Garden container styled like a video player */
+.video-player {
+  width: 640px;
+  height: 360px;
+  background-image: url('garden.png');
+  /* Garden background image */
   background-size: cover;
-  /* Ensures the background stretches properly */
-  position: relative;
-  /* Maintains positioning for child elements */
-  overflow: hidden;
-  /* Prevents any content from spilling out */
-}
-
-
-
-/* Counter Box */
-#counter-box {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  background: linear-gradient(to right, #32cd32, #7fff00);
-  border: 3px solid #228b22;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.5);
+  background-position: center;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
   border-radius: 10px;
-  font-size: 1.5rem;
-  color: white;
-  text-shadow: 1px 1px 2px black;
+  position: relative;
+  /* Allows positioning of elements inside */
+  overflow: hidden;
+  /* Prevent goat from going outside bounds */
 }
 
-/* Buttons */
-#controls {
-  margin-top: 1rem;
-}
-
-button {
-  padding: 10px 20px;
-  margin: 5px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  background-color: #87ceeb;
-  color: white;
-  text-shadow: 1px 1px 2px black;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  background-color: #4682b4;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-}
-
-#sheep {
+/* Goat image for animation */
+.goat-image {
   position: absolute;
   bottom: 10px;
-  /* Distance from the bottom of the animation container */
+  /* Positioned slightly above the bottom of the container */
   left: 0;
-  /* Starts at the left edge */
-  height: 70px;
-  /* Reduce the size of the sheep */
-  width: auto;
-  /* Maintain the aspect ratio */
-  z-index: 10;
-  /* Ensures the sheep is on top of the background */
+  /* Start from the left */
+  width: 100px;
+  /* Adjust size as needed */
+  height: auto;
+  /* Maintain aspect ratio */
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  /* Smooth hiding and flipping effect */
+}
+
+/* Text container for the counter */
+.text-container {
+  position: absolute;
+  top: 10px;
+  /* Center top */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  /* Set the size of the container */
+  height: 50px;
+  /* Adjust height to fit text */
+  background-color: #FFDD57;
+  /* A playful yellow color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 4px solid #FF5733;
+  /* Bright orange border */
+  border-radius: 15px;
+  /* Rounded corners for a cartoonish look */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /* Add a shadow for emphasis */
+}
+
+/* Cartoonish text styling */
+.text-count {
+  font-size: 24px;
+  /* Large text */
+  font-family: 'Comic Sans MS', 'Arial', sans-serif;
+  /* Cartoonish font style */
+  font-weight: bold;
+  color: #333;
+  /* Dark text color for contrast */
+}
+
+/* Button styling */
+.button-container {
+  margin-top: 20px;
+  /* Add space between container and buttons */
+}
+
+.button {
+  font-size: 18px;
+  font-family: 'Comic Sans MS', 'Arial', 'sans-serif';
+  font-weight: bold;
+  background-color: #FF5733;
+  /* Bright orange color for buttons */
+  color: #fff;
+  /* White text */
+  border: none;
+  border-radius: 10px;
+  /* Rounded corners */
+  padding: 10px 20px;
+  /* Button size */
+  cursor: pointer;
+  /* Add a pointer cursor on hover */
+  margin: 0 10px;
+  /* Add space between buttons */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  /* Add shadow for depth */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  /* Smooth hover animation */
+}
+
+/* Button hover effect */
+.button:hover {
+  transform: translateY(-3px);
+  /* Lift button on hover */
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.3);
+  /* Enhance shadow */
 }
